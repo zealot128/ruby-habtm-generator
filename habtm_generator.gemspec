@@ -5,7 +5,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["stefan.wienert@pludoni.de"]
   gem.description   = %q{Generates has-and-belongs-to-many migrations. Use rails generate habtm model1 model2}
   gem.summary       = gem.description
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/zealot128/ruby-habtm-generator"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

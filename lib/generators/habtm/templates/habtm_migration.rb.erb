@@ -1,0 +1,11 @@
+class <%= migration_class_name %> < ActiveRecord::Migration
+  def change
+    create_table :<%= table_name %>, :id => false do |t|
+      t.references <%= references %>
+    end
+
+    add_index :<%= table_name %>, [<%=id_columns %>],
+      name: "<%=table_name%>_index",
+      unique: true
+  end
+end

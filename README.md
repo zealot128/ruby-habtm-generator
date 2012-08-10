@@ -5,15 +5,12 @@
 
 Add this line to your application's Gemfile:
 
-    gem 'habtm_generator'
+    gem 'habtm_generator', :group => :development
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install habtm_generator
 
 ## Usage
 
@@ -33,3 +30,4 @@ This process is reversible (with ``rails destroy habtm model1 model2``).
 ## Potential Caveats
 
 * Namespaced models will not work
+* unique-constraint on index. I find this most useful for most situations. Just remove that from the generated migration before rake db:migrate

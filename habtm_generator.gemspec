@@ -12,6 +12,6 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "habtm_generator"
   gem.require_paths = ["lib"]
-  gem.version       = "0.1"
-  gem.add_dependency "activerecord", ">3.1"
+  gem.version       = "0.2"
+  gem.add_dependency "activerecord", "~> 4.1.0.rc1"
 end

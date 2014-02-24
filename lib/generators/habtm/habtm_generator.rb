@@ -5,7 +5,7 @@ class HabtmGenerator < ActiveRecord::Generators::Base
   argument :other_model, required: true,
     type: :string, desc: "List both part of the habtm migration to generate the table"
 
-  def create_migration
+  def create_migration_file
     models.map!{|i|i.singularize}
     migration_template "habtm_migration.rb.erb",
       "db/migrate/#{migration_name}.rb"

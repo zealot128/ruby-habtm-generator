@@ -13,5 +13,8 @@ Gem::Specification.new do |gem|
   gem.name          = "habtm_generator"
   gem.require_paths = ["lib"]
   gem.version       = "0.2"
-  gem.add_dependency "activerecord", "~> 4.1.0.rc1"
+  gem.add_dependency "activerecord"
+  gem.add_development_dependency 'appraisal'
+  gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'rails-dummy'
 end

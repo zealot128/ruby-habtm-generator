@@ -29,5 +29,7 @@ This process is reversible (with ``rails destroy habtm model1 model2``).
 
 ## Potential Caveats
 
+
 * Namespaced models will not work
 * unique-constraint on index. I find this most useful for most situations. Just remove that from the generated migration before rake db:migrate
+

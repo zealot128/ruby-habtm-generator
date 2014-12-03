@@ -1,3 +1,4 @@
+puts "Running test for #{Rails.version}"
 user = User.create!
 post = Post.create!
 user.posts << post

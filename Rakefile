@@ -12,6 +12,5 @@ task :test => [:clear, 'dummy:app'] do
   system 'rails g habtm user post'
   system 'rake db:migrate'
   system 'pwd'
-  puts 'Running test'
   system 'rails r ../../test.rb'
 end

@@ -10,18 +10,35 @@ class HabtmGenerator < ActiveRecord::Generators::Base
     migration_template "habtm_migration.rb.erb",
       "db/migrate/#{migration_name}.rb"
 
-    insert_into_file "app/models/#{models[0]}.rb",
-      "  has_and_belongs_to_many :#{models[1].pluralize}\n",
-      after: "class #{models[0].camelize} < ActiveRecord::Base\n"
-    insert_into_file "app/models/#{models[1]}.rb",
-      "  has_and_belongs_to_many :#{models[0].pluralize}\n",
-      after: "class #{models[1].camelize} < ActiveRecord::Base\n"
+    add_migration_line model: models[0],  other: models[1]
+    add_migration_line model: models[1],  other: models[0]
   end
 
   private
 
+  def add_migration_line(hash)
+    other = hash[:other]
+    model = hash[:model]
+    extra = if other.include?('/') || model.include?('/')
+                   ", :join_table => '#{table_name}', :class_name => '#{other.camelcase}', :foreign_key => '#{no_ns(model.foreign_key)}', :association_foreign_key => '#{no_ns(other.foreign_key)}'"
+                 else
+                   ""
+                 end
+    insert_into_file "app/models/#{model}.rb",
+      "  has_and_belongs_to_many :#{no_ns other.pluralize}#{extra}\n",
+      after: "class #{model.camelize} < ActiveRecord::Base\n"
+
+  end
+
+  def no_ns(m)
+    m.gsub('/','_')
+  end
+
+  def join_table(model)
+  end
+
   def table_name
-    sorted_models.map(&:pluralize).join("_")
+    sorted_models.map{|i| no_ns i.tableize}.join("_")
   end
 
   def models
@@ -33,11 +50,11 @@ class HabtmGenerator < ActiveRecord::Generators::Base
   end
 
   def references
-    sorted_models.map{|i| ":#{i}"}.join(", ")
+    sorted_models.map{|i| ":#{no_ns i.singularize}"}.join(", ")
   end
 
   def id_columns
-    sorted_models.map{|i| ":#{i}_id"}.join(", ")
+    sorted_models.map{|i| ":#{no_ns i.foreign_key}"}.join(", ")
   end
 
   def migration_name

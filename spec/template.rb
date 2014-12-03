@@ -1,3 +1,0 @@
-
-require 'pry'
-binding.pry

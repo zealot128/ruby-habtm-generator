@@ -13,4 +13,5 @@ before_install:
 - cd habtm_generator
 - bundle install --jobs=3 --retry=3
 script:
+- cd ../habtm_generator
 - bundle exec rake test

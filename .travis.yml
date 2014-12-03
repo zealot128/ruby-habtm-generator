@@ -7,6 +7,10 @@ gemfile:
 rvm:
 - 2.1.1
 before_install:
+- pwd
+- cd ..
+- mv ruby-habtm-generator habtm_generator
+- cd habtm_generator
 - bundle install --jobs=3 --retry=3
 script:
 - bundle exec rake test

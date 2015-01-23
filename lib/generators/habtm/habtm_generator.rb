@@ -4,6 +4,7 @@ class HabtmGenerator < ActiveRecord::Generators::Base
   source_root File.expand_path('../templates', __FILE__)
   argument :other_model, required: true,
     type: :string, desc: "List both part of the habtm migration to generate the table"
+  class_option :convention, :type => :string, :aliases => "-c", :desc => "Table names convention. Available options are 'rails' and 'mysql_workbench'.", :default => "rails"
 
   def create_migration_file
     models.map!{|i|i.singularize}
@@ -37,8 +38,21 @@ class HabtmGenerator < ActiveRecord::Generators::Base
   def join_table(model)
   end
 
+  def coding_convention
+    options[:convention].to_s
+  end
+
   def table_name
-    sorted_models.map{|i| no_ns i.tableize}.join("_")
+    junction_string = ''
+
+    case coding_convention
+    when 'mysql_workbench'
+      junction_string = '_has_'
+    else
+      junction_string = '_'
+    end
+
+    sorted_models.map{|i| no_ns i.tableize}.join(junction_string)
   end
 
   def models
@@ -46,7 +60,14 @@ class HabtmGenerator < ActiveRecord::Generators::Base
   end
 
   def sorted_models
-    models.map(&:singularize).map(&:underscore).sort
+    ret = models.map(&:singularize).map(&:underscore)
+
+    case coding_convention
+    when 'mysql_workbench'
+      ret
+    else
+      ret.sort
+    end
   end
 
   def references

@@ -1,3 +1,4 @@
+
 require 'rails/generators/migration'
 require 'rails/generators/active_record'
 class HabtmGenerator < ActiveRecord::Generators::Base
@@ -71,7 +72,7 @@ class HabtmGenerator < ActiveRecord::Generators::Base
   end
 
   def references
-    sorted_models.map{|i| ":#{no_ns i.singularize}"}.join(", ")
+    sorted_models.map{|i| ":#{no_ns i.singularize}"}
   end
 
   def id_columns

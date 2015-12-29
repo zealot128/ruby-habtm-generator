@@ -10,3 +10,9 @@ process = Admin::Process.create!
 user.admin_processes << process
 
 process.reload.users.include?(user) || (raise StandardError.new('Admin/Process not loaded'))
+
+
+# Common namespace
+cp = ChefProcess.create!
+cp.chef_scripts.create!
+

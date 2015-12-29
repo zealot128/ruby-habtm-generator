@@ -51,7 +51,9 @@ class HabtmGenerator < ActiveRecord::Generators::Base
       junction_string = '_'
     end
 
-    sorted_models.map{|i| no_ns i.tableize}.join(junction_string)
+    pluralized = sorted_models.map{|i| no_ns i.tableize}
+    # stolen from active_record/associations/builder/has_and_belongs_to_many.rb
+    pluralized.join("\0").gsub(/^(.*[._])(.+)\0\1(.+)/, '\1\2_\3').tr("\0", junction_string)
   end
 
   def models

@@ -19,6 +19,10 @@ task :test => [:clear, 'dummy:app'] do
   system 'rails g model admin/process'
   system 'rails g habtm user post'
   system 'rails g habtm user admin/process'
+
+  system 'rails g model chef_process'
+  system 'rails g model chef_script'
+  system 'rails g habtm chef_process chef_script'
   system 'rake db:migrate'
   system 'pwd'
   system 'rails r ../../test.rb'

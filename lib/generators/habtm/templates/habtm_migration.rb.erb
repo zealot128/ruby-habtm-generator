@@ -1,7 +1,8 @@
 class <%= migration_class_name %> < ActiveRecord::Migration
   def change
     create_table :<%= table_name %>, :id => false do |t|
-      t.references <%= references %>
+      t.references <%= references[0] %>
+      t.references <%= references[1] %>
     end
 
     add_index :<%= table_name %>, [<%=id_columns %>],

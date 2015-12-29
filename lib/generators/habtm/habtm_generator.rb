@@ -26,10 +26,8 @@ class HabtmGenerator < ActiveRecord::Generators::Base
                  else
                    ""
                  end
-    insert_into_file "app/models/#{model}.rb",
-      "  has_and_belongs_to_many :#{no_ns other.pluralize}#{extra}\n",
-      after: "class #{model.camelize} < ActiveRecord::Base\n"
-
+    inject_into_class "app/models/#{model}.rb", model.camelcase,
+      "  has_and_belongs_to_many :#{no_ns other.pluralize}#{extra}\n"
   end
 
   def no_ns(m)

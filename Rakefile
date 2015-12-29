@@ -3,6 +3,13 @@ require "bundler/gem_tasks"
 require 'rails/dummy/tasks'
 
 
+class Rails::Dummy::Generator
+  def original_name
+    'habtm_generator'
+  end
+end
+
+
 task :clear do
   rm_rf 'spec/dummy'
 end

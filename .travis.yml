@@ -1,12 +1,16 @@
 language: ruby
+sudo: false
+cache: bundler
+
 gemfile:
 - gemfiles/rails_4.0.gemfile
 - gemfiles/rails_4.1.gemfile
 - gemfiles/rails_4.2.gemfile
+- gemfiles/rails_5.0.gemfile
 
 rvm:
-- 2.1.1
-before_install:
-- bundle install --jobs=3 --retry=3
+- 2.2.3
+- ruby-head
+
 script:
 - bundle exec rake test

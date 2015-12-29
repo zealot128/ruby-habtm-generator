@@ -1,6 +1,7 @@
 # HabtmGenerator
 
 [![Build Status](https://travis-ci.org/zealot128/ruby-habtm-generator.svg?branch=master)](https://travis-ci.org/zealot128/ruby-habtm-generator)
+[![Gem Version](https://badge.fury.io/rb/habtm_generator.svg)](https://badge.fury.io/rb/habtm_generator)
 
 ## Installation
 
